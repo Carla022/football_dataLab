@@ -33,17 +33,19 @@ SELECT name FROM divisions WHERE country = 'Scotland';
 
 ```sql
 <!-- Copy solution here -->
+SELECT * FROM divisions WHERE name = 'Bundesliga';
+SELECT COUNT (matches) FROM matches WHERE division_code = 'D1' AND (hometeam = 'Freiburg' OR awayteam = 'Freiburg');
+-- OR count (*)
 
 
 ```
 
 5) Find the unique names of the teams which include the word "City" in their name (as entered in the database) 
 
-<!-- RETURN -->
 
 ```sql
 <!-- Copy solution here -->
-SELECT * FROM divisions WHERE LOWER (name) LIKE LOWER('%City%');
+SELECT DISTINCT hometeam FROM matches WHERE hometeam LIKE '%City';
 
 ```
 
@@ -51,15 +53,16 @@ SELECT * FROM divisions WHERE LOWER (name) LIKE LOWER('%City%');
 
 ```sql
 <!-- Copy solution here -->
-SELECT COUNT(DISTINCT name) FROM divisions WHERE country = 'France';
+SELECT COUNT(DISTINCT hometeam) FROM matches WHERE division_code = 'F1' or division_code = 'F2';
 
+-- OR WHERE division_code IN ('F1','F2');
 ```
 
 7) Have Huddersfield played Swansea in the period covered?
 
 ```sql
 <!-- Copy solution here -->
-SELECT * FROM matches WHERE awayteam = 'Huddersfield' and hometeam = 'Swansea';
+SELECT * FROM matches WHERE awayteam = 'Huddersfield' AND hometeam = 'Swansea';
 
 ```
 
@@ -71,13 +74,15 @@ SELECT * FROM matches WHERE awayteam = 'Huddersfield' and hometeam = 'Swansea';
 -- specify team
 SELECT * FROM matches WHERE ftag = fthg;
 
+SELECT COUNT(*) FROM matches WHERE division_code = 'N1' AND  (ftr = 'D' AND  seasoN BETWEEN 2010 AND 2015); 
+
 ```
 
 9) Select the matches played in the Premier League in order of total goals scored from highest to lowest. Where there is a tie the match with more home goals should come first.
 
 ```sql
 <!-- Copy solution here -->
-
+SELECT * FROM matches WHERE division_code = 'E0' ORDER BY (fthg + ftag) DESC, fthg DESC;
 
 ```
 
@@ -86,7 +91,13 @@ SELECT * FROM matches WHERE ftag = fthg;
 ```sql
 <!-- Copy solution here -->
 
+SELECT division_code, season, SUM(fthg + ftag) 
+FROM matches
+GROUP BY division_code, season
+ORDER BY sum DESC
+LIMIT 1;
 
+-- LIMIT BY A NUMBER, LIMITS THE TABLE TO THE TOP 1
 ```
 
 ### Useful Resources
