@@ -59,7 +59,7 @@ SELECT COUNT(DISTINCT name) FROM divisions WHERE country = 'France';
 
 ```sql
 <!-- Copy solution here -->
-
+SELECT * FROM matches WHERE awayteam = 'Huddersfield' and hometeam = 'Swansea';
 
 ```
 
@@ -68,6 +68,7 @@ SELECT COUNT(DISTINCT name) FROM divisions WHERE country = 'France';
 ```sql
 <!-- Copy solution here -->
 -- add a count and a season 
+-- specify team
 SELECT * FROM matches WHERE ftag = fthg;
 
 ```
