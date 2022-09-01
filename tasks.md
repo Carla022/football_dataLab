@@ -67,7 +67,8 @@ SELECT COUNT(DISTINCT name) FROM divisions WHERE country = 'France';
 
 ```sql
 <!-- Copy solution here -->
-
+-- add a count and a season 
+SELECT * FROM matches WHERE ftag = fthg;
 
 ```
 
